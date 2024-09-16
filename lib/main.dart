@@ -46,27 +46,38 @@ class AppBarWithDropdown extends StatelessWidget implements PreferredSizeWidget 
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      backgroundColor: Colors.blue[400], 
       title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween, 
         children: [
-          Text('Rainy or Sunny'),
-          Spacer(),
-          DropdownButton<String>(
-            value: selectedCity,
-            icon: Icon(Icons.arrow_downward, color: Colors.white),
-            dropdownColor: Colors.blue,
-            underline: SizedBox(),
-            items: <String>['Bergen', 'Oslo', 'Stavanger', 'Trondheim', 'Drammen', 'Fredrikstad', 'Skien', 'Kristiansand', 'Tønsberg', 'Ålesund']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value, style: TextStyle(color: Colors.black)),
-              );
-            }).toList(),
-            onChanged: (String? newValue) {
-              if (newValue != null) {
-                onCityChanged(newValue); 
-              }
-            },
+          Text(
+            'Rainy or Sunny',
+            style: TextStyle(color: Colors.white), 
+          ),
+          Spacer(flex: 1), 
+          Padding(
+            padding: const EdgeInsets.only(right: 16.0), 
+            child: DropdownButton<String>(
+              value: selectedCity,
+              icon: Icon(Icons.expand_more, color: Colors.white, size: 24), 
+              dropdownColor: Colors.blue[400], 
+              underline: SizedBox(), 
+              items: <String>['Bergen', 'Oslo', 'Stavanger', 'Trondheim', 'Drammen', 'Fredrikstad', 'Skien', 'Kristiansand', 'Tønsberg', 'Ålesund']
+                  .map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0), 
+                    child: Text(value, style: TextStyle(color: Colors.white)), 
+                  ),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                if (newValue != null) {
+                  onCityChanged(newValue); 
+                }
+              },
+            ),
           ),
         ],
       ),
